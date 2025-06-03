@@ -9,7 +9,7 @@ import {
   ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -26,6 +26,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   viewChild,
+  DOCUMENT
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { matDatepickerAnimations } from '@angular/material/datepicker';
