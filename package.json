@@ -38,6 +38,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build -c=production",
+    "build:gh-pages": "ng build -c=production --base-href /angular-material-components/",
+    "deploy:gh-pages": "npm run build:gh-pages && npx angular-cli-ghpages --dir=dist/angular-material-components",
     "prettier:fix": "prettier --write projects/**/*.ts",
     "prepare": "npm run prettier:fix",
     "build:datetime-picker": "ng build NgxMatDatetimePicker",
