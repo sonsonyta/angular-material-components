@@ -163,7 +163,7 @@ export class NgxMatDatetimePickerV2<D> implements OnInit, OnDestroy {
 
     if (customPanelClass) {
       if (Array.isArray(customPanelClass)) {
-        panelClasses.push(...customPanelClass.filter(cls => cls));
+        panelClasses.push(...customPanelClass.filter((cls) => cls));
       } else {
         panelClasses.push(customPanelClass);
       }

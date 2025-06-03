@@ -10,7 +10,7 @@ import {
   Output,
   forwardRef,
   inject,
-  signal
+  signal,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -50,7 +50,7 @@ export const NGX_MAT_DATETIME_PICKER_VALIDATORS: any = {
     { provide: MatFormFieldControl, useExisting: NgxMatDatetimePickerInputV2 },
   ],
   host: {
-    'class': 'ngx-mat-datetime-picker-input',
+    class: 'ngx-mat-datetime-picker-input',
     '[attr.aria-haspopup]': '_datepicker ? "dialog" : null',
     '[attr.aria-owns]': '(_datepicker?.opened && _datepicker.id) || null',
     '[attr.min]': 'min ? _dateAdapter.toIso8601(min) : null',
@@ -65,7 +65,14 @@ export const NGX_MAT_DATETIME_PICKER_VALIDATORS: any = {
   },
 })
 export class NgxMatDatetimePickerInputV2<D>
-  implements MatFormFieldControl<D>, ControlValueAccessor, OnDestroy, OnInit, Validator, NgxMatDatepickerControl<D> {
+  implements
+    MatFormFieldControl<D>,
+    ControlValueAccessor,
+    OnDestroy,
+    OnInit,
+    Validator,
+    NgxMatDatepickerControl<D>
+{
   private readonly _elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);
   private readonly _dateAdapter = inject(DateAdapter<D>, { optional: true });
   private readonly _dateFormats = inject(MAT_DATE_FORMATS, { optional: true });
@@ -142,20 +149,22 @@ export class NgxMatDatetimePickerInputV2<D>
   private readonly _disabled = signal<boolean>(false);
 
   /** Emits when a `change` event is fired on this `<input>`. */
-  @Output() readonly dateChange: EventEmitter<NgxMatDatetimePickerInputEvent<D>> =
-    new EventEmitter<NgxMatDatetimePickerInputEvent<D>>();
+  @Output() readonly dateChange: EventEmitter<NgxMatDatetimePickerInputEvent<D>> = new EventEmitter<
+    NgxMatDatetimePickerInputEvent<D>
+  >();
 
   /** Emits when an `input` event is fired on this `<input>`. */
-  @Output() readonly dateInput: EventEmitter<NgxMatDatetimePickerInputEvent<D>> =
-    new EventEmitter<NgxMatDatetimePickerInputEvent<D>>();
+  @Output() readonly dateInput: EventEmitter<NgxMatDatetimePickerInputEvent<D>> = new EventEmitter<
+    NgxMatDatetimePickerInputEvent<D>
+  >();
 
   /** Emits when the internal state has changed */
   readonly stateChanges = new Subject<void>();
 
-  _onTouched = () => { };
-  _validatorOnChange = () => { };
+  _onTouched = () => {};
+  _validatorOnChange = () => {};
 
-  private _cvaOnChange: (value: any) => void = () => { };
+  private _cvaOnChange: (value: any) => void = () => {};
   private _valueChangesSubscription = Subscription.EMPTY;
   private _localeSubscription = Subscription.EMPTY;
 
