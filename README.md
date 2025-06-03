@@ -5,6 +5,10 @@
 [![Build Status](https://travis-ci.com/h2qutc/angular-material-components.svg?branch=master)](https://travis-ci.com/h2qutc/angular-material-components)
 [![License](https://img.shields.io/npm/l/angular-material-components.svg)](https://www.npmjs.com/package/angular-material-components)
 
+## 🚀 Live Demo
+
+**[Ver Demo en GitHub Pages](https://gnurub.github.io/angular-material-components/)**
+
 ## Description
 
 Angular Material Library provide extra components for every project (Datetime picker, Time picker,
@@ -28,7 +32,7 @@ And thank you so much for your coffee ❤️
 Choose the version corresponding to your Angular version:
 
 | Angular | @ngxmc/datetime-picker          |
-|---------|---------------------------------|
+| ------- | ------------------------------- |
 | 19      | 19.x+                           |
 | 18      | 18.x+                           |
 | 17      | none                            |
@@ -97,6 +101,29 @@ npm install --save  @ngxmc/file-input
 ```
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
 ```
+
+## 🚀 Deployment
+
+This project is automatically deployed to GitHub Pages using GitHub Actions. You can also deploy
+manually:
+
+### Automatic Deployment
+
+- Pushes to `main` branch automatically trigger deployment
+- GitHub Actions workflow builds and deploys to `gh-pages` branch
+- Site is available at: https://gnurub.github.io/angular-material-components/
+
+### Manual Deployment
+
+```bash
+# Build for GitHub Pages
+pnpm run build:gh-pages
+
+# Deploy to GitHub Pages
+pnpm run deploy:gh-pages
+```
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ## License
 
