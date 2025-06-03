@@ -11,6 +11,11 @@ export const APP_ROUTES: Routes = [
       import('./demo-datetime/demo-datetime.component').then((m) => m.DemoDatetimeComponent),
   },
   {
+    path: 'datetimepicker-v2',
+    loadComponent: () =>
+      import('./demo-datetime-v2/demo-datetime-v2.component').then((m) => m.DemoDatetimeV2Component),
+  },
+  {
     path: 'timepicker',
     loadComponent: () => import('./demo-time/demo-time.component').then((m) => m.DemoTimeComponent),
   },

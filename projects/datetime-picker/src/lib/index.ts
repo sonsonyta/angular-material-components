@@ -14,3 +14,9 @@ export * from './month-view';
 export * from './multi-year-view';
 export * from './timepicker.component';
 export * from './year-view';
+
+// New V2 components
+export * from './datetime-picker-content-v2.component';
+export * from './datetime-picker-input-v2.directive';
+export * from './datetime-picker-v2.component';
+
