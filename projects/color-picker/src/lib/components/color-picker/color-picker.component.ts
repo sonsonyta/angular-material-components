@@ -26,7 +26,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   viewChild,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { matDatepickerAnimations } from '@angular/material/datepicker';

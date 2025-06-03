@@ -54,7 +54,7 @@ import {
   input,
   output,
   viewChild,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
