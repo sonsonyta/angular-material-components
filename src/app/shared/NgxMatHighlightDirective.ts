@@ -8,6 +8,11 @@ export class NgxMatHighlightDirective {
   private readonly eltRef = inject(ElementRef)
 
   constructor() {
-    afterNextRender(() => hljs.highlightElement(this.eltRef.nativeElement));
+    afterNextRender(() => {
+      // Safely access hljs without dependency injection
+      if (hljs && hljs.highlightElement) {
+        hljs.highlightElement(this.eltRef.nativeElement);
+      }
+    });
   }
 }

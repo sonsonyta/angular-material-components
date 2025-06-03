@@ -5,6 +5,7 @@ Este proyecto está configurado para ser desplegado en GitHub Pages de dos forma
 ## Método 1: Automático con GitHub Actions (Recomendado)
 
 El proyecto incluye un workflow de GitHub Actions que se ejecuta automáticamente cuando:
+
 - Haces push a la rama `main` o `master`
 - Creas un Pull Request
 - Lo ejecutas manualmente desde la pestaña "Actions" en GitHub
@@ -17,16 +18,19 @@ El proyecto incluye un workflow de GitHub Actions que se ejecuta automáticament
 4. El workflow se ejecutará automáticamente en el próximo push
 
 ### URL del sitio:
+
 Tu sitio estará disponible en: `https://gnurub.github.io/angular-material-components/`
 
 ## Método 2: Deployment Manual
 
 ### Instalación de dependencias:
+
 ```bash
 pnpm install
 ```
 
 ### Build y deploy:
+
 ```bash
 # Opción 1: Un solo comando
 pnpm run deploy:gh-pages
