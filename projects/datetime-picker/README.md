@@ -25,6 +25,7 @@ Choose the version corresponding to your Angular version:
 
 | Angular | @ngxmc/datetime-picker          |
 | ------- | ------------------------------- |
+| 20      | 20.x+                           |
 | 19      | 19.x+                           |
 | 18      | 18.x+                           |
 | 16      | 16.x+                           |

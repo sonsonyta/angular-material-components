@@ -1,6 +1,6 @@
 # FORKED FROM [h2qutc/angular-material-components](https://github.com/h2qutc/angular-material-components)
 
-# Angular Material Extra Components (DatetimePicker, TimePicker, ColorPicker, FileInput ...) for @angular/material 7.x, 8.x, 9.x, 10.x, 11.x, 12.x, 13.x, 14.x, 15.x, 16.x, 18.x, 19.x
+# Angular Material Extra Components (DatetimePicker, TimePicker, ColorPicker, FileInput ...) for @angular/material 7.x, 8.x, 9.x, 10.x, 11.x, 12.x, 13.x, 14.x, 15.x, 16.x, 18.x, 19.x, 20.x
 
 [![Build Status](https://travis-ci.com/h2qutc/angular-material-components.svg?branch=master)](https://travis-ci.com/h2qutc/angular-material-components)
 [![License](https://img.shields.io/npm/l/angular-material-components.svg)](https://www.npmjs.com/package/angular-material-components)
@@ -33,6 +33,7 @@ Choose the version corresponding to your Angular version:
 
 | Angular | @ngxmc/datetime-picker          |
 | ------- | ------------------------------- |
+| 20      | 20.x+                           |
 | 19      | 19.x+                           |
 | 18      | 18.x+                           |
 | 17      | none                            |

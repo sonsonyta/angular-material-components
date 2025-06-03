@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const APP_ROUTES: Routes = [
   {
-    path: 'home',
+    path: '',
     loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent),
   },
   {
@@ -31,6 +31,6 @@ export const APP_ROUTES: Routes = [
     loadComponent: () =>
       import('./demo-fileinput/demo-fileinput.component').then((m) => m.DemoFileInputComponent),
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
