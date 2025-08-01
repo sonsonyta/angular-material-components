@@ -43,7 +43,7 @@ export const NGX_MAT_DATETIME_PICKER_VALIDATORS: any = {
 };
 
 @Directive({
-  selector: 'input[ngxMatDatetimePickerV2]',
+  selector: 'input[ngxMatDatetimePicker]',
   providers: [
     NGX_MAT_DATETIME_PICKER_VALUE_ACCESSOR,
     NGX_MAT_DATETIME_PICKER_VALIDATORS,
@@ -81,7 +81,7 @@ export class NgxMatDatetimePickerInputV2<D>
   // Reference to NgControl - will be set manually to avoid circular dependency
   public ngControl: NgControl | null = null;
 
-  @Input() ngxMatDatetimePickerV2: NgxMatDatetimePickerV2<D>;
+  @Input() ngxMatDatetimePicker: NgxMatDatetimePickerV2<D>;
 
   /** The value of the input. */
   @Input()
@@ -279,9 +279,9 @@ export class NgxMatDatetimePickerInputV2<D>
     this.ngControl = this._injector.get(NgControl, null, { optional: true, self: true });
     console.log('🔧 NgControl found:', !!this.ngControl, this.ngControl?.constructor?.name);
 
-    if (this.ngxMatDatetimePickerV2) {
+    if (this.ngxMatDatetimePicker) {
       console.log('🔧 Registering input with datepicker');
-      this.ngxMatDatetimePickerV2._registerInput(this);
+      this.ngxMatDatetimePicker._registerInput(this);
     } else {
       console.log('❌ No datepicker available for registration');
     }
@@ -324,8 +324,8 @@ export class NgxMatDatetimePickerInputV2<D>
   _onKeydown(event: KeyboardEvent): void {
     const isAltDownArrow = event.altKey && event.keyCode === 40; // DOWN_ARROW
 
-    if (this.ngxMatDatetimePickerV2 && isAltDownArrow && !this._elementRef.nativeElement.readOnly) {
-      this.ngxMatDatetimePickerV2.open();
+    if (this.ngxMatDatetimePicker && isAltDownArrow && !this._elementRef.nativeElement.readOnly) {
+      this.ngxMatDatetimePicker.open();
       event.preventDefault();
     }
   }
@@ -361,8 +361,8 @@ export class NgxMatDatetimePickerInputV2<D>
 
   _onClick(event: MouseEvent): void {
     // Open the datepicker when clicking on the input
-    if (this.ngxMatDatetimePickerV2 && !this.disabled) {
-      this.ngxMatDatetimePickerV2.open();
+    if (this.ngxMatDatetimePicker && !this.disabled) {
+      this.ngxMatDatetimePicker.open();
     }
   }
 

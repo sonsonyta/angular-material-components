@@ -43,8 +43,8 @@ export class AppModule {}
 ```html
 <mat-form-field>
   <mat-label>Date and Time</mat-label>
-  <input matInput [ngxMatDatetimePickerV2]="picker" [(ngModel)]="selectedDateTime" />
-  <ngx-mat-datetime-picker-v2 #picker></ngx-mat-datetime-picker-v2>
+  <input matInput [ngxMatDatetimePicker]="picker" [(ngModel)]="selectedDateTime" />
+  <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
 </mat-form-field>
 ```
 
@@ -58,8 +58,8 @@ datetimeControl = new FormControl(new Date());
 ```html
 <mat-form-field>
   <mat-label>Date and Time</mat-label>
-  <input matInput [formControl]="datetimeControl" [ngxMatDatetimePickerV2]="picker" />
-  <ngx-mat-datetime-picker-v2 #picker></ngx-mat-datetime-picker-v2>
+  <input matInput [formControl]="datetimeControl" [ngxMatDatetimePicker]="picker" />
+  <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
 </mat-form-field>
 ```
 
@@ -68,7 +68,7 @@ datetimeControl = new FormControl(new Date());
 ### Picker Properties
 
 ```html
-<ngx-mat-datetime-picker-v2
+<ngx-mat-datetime-picker
   #picker
   [hideTime]="false"           <!-- Show/hide time selector -->
   [showSpinners]="true"        <!-- Show increment buttons -->
@@ -82,7 +82,7 @@ datetimeControl = new FormControl(new Date());
   [disabled]="false"           <!-- Disable the picker -->
   [startView]="'month'"        <!-- Initial view: 'month' | 'year' | 'multi-year' -->
   [defaultTime]="[12, 0, 0]">  <!-- Default time [hours, minutes, seconds] -->
-</ngx-mat-datetime-picker-v2>
+</ngx-mat-datetime-picker>
 ```
 
 ### Input Properties
@@ -90,7 +90,7 @@ datetimeControl = new FormControl(new Date());
 ```html
 <input
   matInput
-  [ngxMatDatetimePickerV2]="picker"
+  [ngxMatDatetimePicker]="picker"
   [min]="minDate"              <!-- Minimum date -->
   [max]="maxDate"              <!-- Maximum date -->
   [dateFilter]="myFilter"      <!-- Filter function -->
@@ -104,8 +104,8 @@ datetimeControl = new FormControl(new Date());
 ```html
 <mat-form-field>
   <mat-label>Date</mat-label>
-  <input matInput [ngxMatDatetimePickerV2]="datePicker" />
-  <ngx-mat-datetime-picker-v2 #datePicker [hideTime]="true"> </ngx-mat-datetime-picker-v2>
+  <input matInput [ngxMatDatetimePicker]="datePicker" />
+  <ngx-mat-datetime-picker #datePicker [hideTime]="true"> </ngx-mat-datetime-picker>
 </mat-form-field>
 ```
 
@@ -129,9 +129,9 @@ dateFilter = (date: Date): boolean => {
   <input
     matInput
     [formControl]="datetimeControl"
-    [ngxMatDatetimePickerV2]="picker"
+    [ngxMatDatetimePicker]="picker"
     [dateFilter]="dateFilter" />
-  <ngx-mat-datetime-picker-v2 #picker></ngx-mat-datetime-picker-v2>
+  <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
   <mat-error *ngIf="datetimeControl.hasError('required')"> Date is required </mat-error>
 </mat-form-field>
 ```
@@ -141,13 +141,13 @@ dateFilter = (date: Date): boolean => {
 ```html
 <mat-form-field>
   <mat-label>Full Time</mat-label>
-  <input matInput [ngxMatDatetimePickerV2]="timePicker" />
-  <ngx-mat-datetime-picker-v2
+  <input matInput [ngxMatDatetimePicker]="timePicker" />
+  <ngx-mat-datetime-picker
     #timePicker
     [showSeconds]="true"
     [enableMeridian]="true"
     [stepMinute]="5">
-  </ngx-mat-datetime-picker-v2>
+  </ngx-mat-datetime-picker>
 </mat-form-field>
 ```
 
@@ -155,11 +155,11 @@ dateFilter = (date: Date): boolean => {
 
 ### Main Changes
 
-| V1 (Previous)             | V2 (New)                     | Notes             |
-| ------------------------- | ---------------------------- | ----------------- |
-| `ngx-mat-datetime-picker` | `ngx-mat-datetime-picker-v2` | New selector      |
-| `ngxMatDatetimePicker`    | `ngxMatDatetimePickerV2`     | New directive     |
-| Custom implementation     | Native Angular Material      | Greater stability |
+| V1 (Previous)             | V2 (New)                  | Notes             |
+| ------------------------- | ------------------------- | ----------------- |
+| `ngx-mat-datetime-picker` | `ngx-mat-datetime-picker` | New selector      |
+| `ngxMatDatetimePicker`    | `ngxMatDatetimePicker`    | New directive     |
+| Custom implementation     | Native Angular Material   | Greater stability |
 
 ### Migration Steps
 
@@ -170,7 +170,7 @@ dateFilter = (date: Date): boolean => {
    import { NgxMatDatetimePickerModule } from '@ngxmc/datetime-picker';
 
    // After
-   import { NgxMatDatetimePickerV2Module } from '@ngxmc/datetime-picker';
+   import { NgxMatDatetimePickerModule } from '@ngxmc/datetime-picker';
    ```
 
 2. **Update templates**:
@@ -181,15 +181,15 @@ dateFilter = (date: Date): boolean => {
    <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
 
    <!-- After -->
-   <input [ngxMatDatetimePickerV2]="picker" />
-   <ngx-mat-datetime-picker-v2 #picker></ngx-mat-datetime-picker-v2>
+   <input [ngxMatDatetimePicker]="picker" />
+   <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
    ```
 
 3. **Check properties**: Most properties are compatible, but some may have changed names.
 
 ## API Reference
 
-### NgxMatDatetimePickerV2
+### NgxMatDatetimePicker
 
 | Property         | Type                                | Default     | Description             |
 | ---------------- | ----------------------------------- | ----------- | ----------------------- |
@@ -220,7 +220,7 @@ dateFilter = (date: Date): boolean => {
 Make sure you have correctly imported the V2 module:
 
 ```typescript
-import { NgxMatDatetimePickerV2Module } from '@ngxmc/datetime-picker';
+import { NgxMatDatetimePickerModule } from '@ngxmc/datetime-picker';
 ```
 
 ### Styles not applied
@@ -236,7 +236,7 @@ Check that you have imported the Angular Material theme:
 Make sure `hideTime` is set to `false`:
 
 ```html
-<ngx-mat-datetime-picker-v2 [hideTime]="false"></ngx-mat-datetime-picker-v2>
+<ngx-mat-datetime-picker [hideTime]="false"></ngx-mat-datetime-picker>
 ```
 
 ## Support
