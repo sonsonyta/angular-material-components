@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -34,16 +35,38 @@ import { NgxMatDatetimePickerV2 } from '../../../projects/datetime-picker/src/li
           <input
             matInput
             [formControl]="datetimeControl"
-            [ngxMatDatetimePickerV2]="datetimePicker"
+            [ngxMatDatetimePicker]="datetimePicker"
             placeholder="Select date and time">
-          <ngx-mat-datetime-picker-v2
+          <ngx-mat-datetime-picker
             #datetimePicker
             [hideTime]="false"
             [showSpinners]="true"
             [showSeconds]="false"
             [stepHour]="1"
             [stepMinute]="15">
-          </ngx-mat-datetime-picker-v2>
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div>
+
+      <div class="example-section">
+        <h3>Basic Example with Min/Max Dates</h3>
+        <mat-form-field appearance="outline">
+          <mat-label>Date and Time</mat-label>
+          <input
+            matInput
+            [formControl]="datetimeControl"
+            [ngxMatDatetimePicker]="datetimePickerWithMinMax"
+            [min]="minDate()"
+            [max]="maxDate()"
+            placeholder="Select date and time">
+          <ngx-mat-datetime-picker
+            #datetimePickerWithMinMax
+            [hideTime]="false"
+            [showSpinners]="true"
+            [showSeconds]="false"
+            [stepHour]="1"
+            [stepMinute]="15">
+          </ngx-mat-datetime-picker>
         </mat-form-field>
       </div>
 
@@ -54,12 +77,12 @@ import { NgxMatDatetimePickerV2 } from '../../../projects/datetime-picker/src/li
           <input
             matInput
             [formControl]="dateOnlyControl"
-            [ngxMatDatetimePickerV2]="dateOnlyPicker"
+            [ngxMatDatetimePicker]="dateOnlyPicker"
             placeholder="Select date only">
-          <ngx-mat-datetime-picker-v2
+          <ngx-mat-datetime-picker
             #dateOnlyPicker
             [hideTime]="true">
-          </ngx-mat-datetime-picker-v2>
+          </ngx-mat-datetime-picker>
         </mat-form-field>
       </div>
 
@@ -70,9 +93,9 @@ import { NgxMatDatetimePickerV2 } from '../../../projects/datetime-picker/src/li
           <input
             matInput
             [formControl]="fullDatetimeControl"
-            [ngxMatDatetimePickerV2]="fullDatetimePicker"
+            [ngxMatDatetimePicker]="fullDatetimePicker"
             placeholder="Date with seconds and AM/PM">
-          <ngx-mat-datetime-picker-v2
+          <ngx-mat-datetime-picker
             #fullDatetimePicker
             [hideTime]="false"
             [showSpinners]="true"
@@ -81,7 +104,7 @@ import { NgxMatDatetimePickerV2 } from '../../../projects/datetime-picker/src/li
             [stepHour]="1"
             [stepMinute]="5"
             [stepSecond]="10">
-          </ngx-mat-datetime-picker-v2>
+          </ngx-mat-datetime-picker>
         </mat-form-field>
       </div>
 
@@ -175,6 +198,12 @@ export class DemoDatetimeV2Component {
   datetimeControl = new FormControl(new Date());
   dateOnlyControl = new FormControl(null);
   fullDatetimeControl = new FormControl(null);
+
+  protected readonly minDate = toSignal(this.datetimeControl.valueChanges, { initialValue: new Date() });
+  protected readonly maxDate = computed(() => {
+    const minDate = this.minDate();
+    return new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate() + 32, minDate.getHours(), minDate.getMinutes(), minDate.getSeconds());
+  });
 
   constructor() {
     // Monitor form control changes

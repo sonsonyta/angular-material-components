@@ -14,6 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ControlValueAccessor,
   FormBuilder,
+  FormControl,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
   Validators,
@@ -77,7 +78,7 @@ export class NgxMatTimepickerComponent<D> implements ControlValueAccessor {
   readonly showSeconds = input<boolean>(false);
   readonly disableMinute = input<boolean>(false);
   readonly enableMeridian = input<boolean>(false);
-  readonly defaultTime = input<number[]>();
+  readonly defaultTime = input<[number, number, number]>();
   readonly color = input<ThemePalette>('primary');
 
   public readonly pattern = PATTERN_INPUT_HOUR;
@@ -87,38 +88,37 @@ export class NgxMatTimepickerComponent<D> implements ControlValueAccessor {
   });
   public readonly meridian = linkedSignal(() => this.meridianInput());
 
-  // Form modernizado
   public readonly form = this.formBuilder.group({
-    hour: [
-      { value: null, disabled: this.disabled() },
-      [Validators.required, Validators.pattern(PATTERN_INPUT_HOUR)],
-    ],
-    minute: [
-      { value: null, disabled: this.disabled() },
-      [Validators.required, Validators.pattern(PATTERN_INPUT_MINUTE)],
-    ],
-    second: [
-      { value: null, disabled: this.disabled() },
-      [Validators.required, Validators.pattern(PATTERN_INPUT_SECOND)],
-    ],
+    hour: new FormControl(this.defaultTime()?.[0] ? String(this.defaultTime()[0]) : null, {
+      validators: [Validators.required, Validators.pattern(PATTERN_INPUT_HOUR)],
+      nonNullable: true,
+    }),
+    minute: new FormControl(this.defaultTime()?.[1] ? String(this.defaultTime()[1]) : null, {
+      validators: [Validators.required, Validators.pattern(PATTERN_INPUT_MINUTE)],
+      nonNullable: true,
+    }),
+    second: new FormControl(this.defaultTime()?.[2] ? String(this.defaultTime()[2]) : null, {
+      validators: [Validators.required, Validators.pattern(PATTERN_INPUT_SECOND)],
+      nonNullable: true,
+    }),
   });
 
-  private _onChange: any = () => {};
-  private _onTouched: any = () => {};
+  private _onChange: any = () => { };
+  private _onTouched: any = () => { };
   public readonly value = model<D>();
 
   /** Hour */
-  private get hour() {
+  private get hour(): number {
     const val = Number(this.form.controls['hour'].getRawValue());
     return Number.isNaN(val) ? 0 : val;
   }
 
-  private get minute() {
+  private get minute(): number {
     const val = Number(this.form.controls['minute'].getRawValue());
     return Number.isNaN(val) ? 0 : val;
   }
 
-  private get second() {
+  private get second(): number {
     const val = Number(this.form.controls['second'].getRawValue());
     return Number.isNaN(val) ? 0 : val;
   }

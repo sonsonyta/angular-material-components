@@ -19,4 +19,3 @@ export * from './year-view';
 export * from './datetime-picker-content-v2.component';
 export * from './datetime-picker-input-v2.directive';
 export * from './datetime-picker-v2.component';
-

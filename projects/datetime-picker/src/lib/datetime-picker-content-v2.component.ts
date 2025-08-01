@@ -7,7 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   inject,
-  signal
+  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,7 +42,9 @@ export interface NgxMatDatetimePickerContentData<D> {
 @Component({
   selector: 'ngx-mat-datetime-picker-content-v2',
   template: `
-    <div class="ngx-mat-datetime-picker-content" [class.ngx-mat-datetime-picker-content-touch]="data.touchUi">
+    <div
+      class="ngx-mat-datetime-picker-content"
+      [class.ngx-mat-datetime-picker-content-touch]="data.touchUi">
       <mat-calendar
         #calendar
         [startView]="data.startView || 'month'"
@@ -97,15 +99,9 @@ export interface NgxMatDatetimePickerContentData<D> {
   styleUrls: ['./datetime-picker-content-v2.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatCalendar,
-    MatButtonModule,
-    NgxMatTimepickerComponent,
-  ],
+  imports: [CommonModule, FormsModule, MatCalendar, MatButtonModule, NgxMatTimepickerComponent],
   host: {
-    'class': 'ngx-mat-datetime-picker-content-v2',
+    class: 'ngx-mat-datetime-picker-content-v2',
     '[class.ngx-mat-datetime-picker-content-touch]': 'data.touchUi',
   },
 })
@@ -136,7 +132,7 @@ export class NgxMatDatetimePickerContentV2<D> implements OnInit, OnDestroy {
     if (this.calendar) {
       this.calendar.selectedChange
         .pipe(takeUntil(this._destroyed))
-        .subscribe(date => this.onDateSelected(date));
+        .subscribe((date) => this.onDateSelected(date));
     }
 
     // Prevent dialog close on overlay click if configured
@@ -231,11 +227,7 @@ export class NgxMatDatetimePickerContentV2<D> implements OnInit, OnDestroy {
     const hours = this._dateAdapter.getHours(date);
     const minutes = this._dateAdapter.getMinutes(date);
     const seconds = this._dateAdapter.getSeconds(date);
-    return [
-      hours,
-      minutes,
-      seconds
-    ];
+    return [hours, minutes, seconds];
   }
 
   private _combineDateTime(date: D, time: [number, number, number]): D {

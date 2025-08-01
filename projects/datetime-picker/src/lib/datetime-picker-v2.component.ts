@@ -1,15 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   EventEmitter,
   inject,
   input,
   OnDestroy,
-  OnInit,
   Output,
   signal,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { DateAdapter, ThemePalette } from '@angular/material/core';
 import { MatCalendarView } from '@angular/material/datepicker';
@@ -25,21 +23,22 @@ import { DEFAULT_STEP } from './utils/date-utils';
 let datepickerUid = 0;
 
 @Component({
-  selector: 'ngx-mat-datetime-picker-v2',
+  selector: 'ngx-mat-datetime-picker',
   template: '',
-  exportAs: 'ngxMatDatetimePickerV2',
+  exportAs: 'ngxMatDatetimePicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   providers: [NGX_MAT_SINGLE_DATE_SELECTION_MODEL_PROVIDER],
 })
-export class NgxMatDatetimePickerV2<D> implements OnInit, OnDestroy {
+export class NgxMatDatetimePickerV2<D> implements OnDestroy {
   private readonly _dialog = inject(MatDialog);
   private readonly _dateAdapter = inject(DateAdapter<D>, { optional: true });
+
   private _dialogRef: MatDialogRef<NgxMatDatetimePickerContentV2<D>> | null = null;
   private _inputStateChanges = Subscription.EMPTY;
 
   /** The id for the datepicker. */
-  readonly id = `ngx-mat-datetime-picker-v2-${datepickerUid++}`;
+  readonly id = `ngx-mat-datetime-picker-${datepickerUid++}`;
 
   /** The input element this datepicker is associated with. */
   datepickerInput: NgxMatDatepickerControl<D>;
@@ -72,16 +71,12 @@ export class NgxMatDatetimePickerV2<D> implements OnInit, OnDestroy {
 
   // Internal state
   private readonly _opened = signal(false);
-  readonly opened = computed(() => this._opened());
+  readonly opened = this._opened.asReadonly();
 
   constructor() {
     if (!this._dateAdapter) {
       throw createMissingDateImplError('DateAdapter');
     }
-  }
-
-  ngOnInit(): void {
-    // Initialize any required setup
   }
 
   ngOnDestroy(): void {
@@ -156,21 +151,21 @@ export class NgxMatDatetimePickerV2<D> implements OnInit, OnDestroy {
 
   /** Open the calendar as a dialog. */
   private _openAsDialog(): void {
-    console.log('🚀 Opening datetime picker dialog');
+    console.debug('🚀 Opening datetime picker dialog');
 
     const panelClasses = ['ngx-mat-datepicker-dialog'];
     const customPanelClass = this.panelClass();
 
     if (customPanelClass) {
       if (Array.isArray(customPanelClass)) {
-        panelClasses.push(...customPanelClass.filter(cls => cls));
+        panelClasses.push(...customPanelClass.filter((cls) => cls));
       } else {
         panelClasses.push(customPanelClass);
       }
     }
 
     const initialValue = this.datepickerInput?.getStartValue();
-    console.log('📅 Initial value for dialog:', initialValue);
+    console.debug('📅 Initial value for dialog:', initialValue);
 
     this._dialogRef = this._dialog.open(NgxMatDatetimePickerContentV2<D>, {
       panelClass: panelClasses,
@@ -200,20 +195,20 @@ export class NgxMatDatetimePickerV2<D> implements OnInit, OnDestroy {
     });
 
     this._dialogRef.afterClosed().subscribe((result: D | undefined) => {
-      console.log('🔚 Dialog closed with result:', result);
+      console.debug('🔚 Dialog closed with result:', result);
       if (result !== undefined && this.datepickerInput) {
-        console.log('📝 Attempting to update input value with:', result);
-        console.log('📝 Input instance:', this.datepickerInput.constructor.name);
+        console.debug('📝 Attempting to update input value with:', result);
+        console.debug('📝 Input instance:', this.datepickerInput.constructor.name);
 
         // Use the public method to properly update the input
         if (this.datepickerInput instanceof NgxMatDatetimePickerInputV2) {
-          console.log('✅ Calling updateValue on NgxMatDatetimePickerInputV2');
+          console.debug('✅ Calling updateValue on NgxMatDatetimePickerInputV2');
           this.datepickerInput.updateValue(result);
         } else {
-          console.log('❌ Input is not instance of NgxMatDatetimePickerInputV2');
+          console.debug('❌ Input is not instance of NgxMatDatetimePickerInputV2');
         }
       } else {
-        console.log('❌ No result or no input available');
+        console.debug('❌ No result or no input available');
       }
       this.close();
     });
