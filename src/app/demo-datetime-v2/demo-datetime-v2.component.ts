@@ -3,12 +3,11 @@ import { Component, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMatDatetimePickerInputV2 } from '../../../projects/datetime-picker/src/lib/datetime-picker-input-v2.directive';
 import { NgxMatDatetimePickerV2 } from '../../../projects/datetime-picker/src/lib/datetime-picker-v2.component';
+import { NgxMatHighlightDirective } from '../shared/NgxMatHighlightDirective';
 
 @Component({
   selector: 'app-demo-datetime-v2',
@@ -17,16 +16,21 @@ import { NgxMatDatetimePickerV2 } from '../../../projects/datetime-picker/src/li
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     NgxMatDatetimePickerV2,
     NgxMatDatetimePickerInputV2,
+    NgxMatHighlightDirective,
     DatePipe,
   ],
   template: `
     <div class="demo-container">
       <h2>NgxMatDatetimePicker V2 Demo</h2>
       <p>This is the new implementation that uses native Angular Material with integrated timepicker.</p>
+
+      <pre>
+        <code ngxMatHighlight class="language-typescript">{{code1}}</code>
+
+        <code ngxMatHighlight class="language-html">{{code2}}</code>
+      </pre>
 
       <div class="example-section">
         <h3>Basic Example</h3>
@@ -198,6 +202,40 @@ export class DemoDatetimeV2Component {
   datetimeControl = new FormControl(new Date());
   dateOnlyControl = new FormControl(null);
   fullDatetimeControl = new FormControl(null);
+
+  public code1 = `
+  import {
+    NgxMatDatetimePickerV2,
+    NgxMatDatetimePickerInputV2,
+  } from '@ngxmc/datetime-picker';
+
+  @Component({
+    imports: [
+      ...
+      NgxMatDatetimePickerV2,
+      NgxMatDatetimePickerInputV2,
+      ...
+    ]
+  })
+  export class AppComponent { }`;
+
+  public code2 = `
+    <mat-form-field appearance="outline">
+      <mat-label>Date and Time</mat-label>
+      <input
+        matInput
+        [formControl]="datetimeControl"
+        [ngxMatDatetimePicker]="datetimePicker"
+        placeholder="Select date and time">
+      <ngx-mat-datetime-picker
+        #datetimePicker
+        [hideTime]="false"
+        [showSpinners]="true"
+        [showSeconds]="false"
+        [stepHour]="1"
+        [stepMinute]="15">
+      </ngx-mat-datetime-picker>
+    </mat-form-field>`;
 
   protected readonly minDate = toSignal(this.datetimeControl.valueChanges, { initialValue: new Date() });
   protected readonly maxDate = computed(() => {
