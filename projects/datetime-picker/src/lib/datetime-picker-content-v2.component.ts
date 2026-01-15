@@ -83,7 +83,7 @@ export interface NgxMatDatetimePickerContentData<D> {
           type="button"
           class="ngx-mat-datetime-picker-cancel-button"
           (click)="onCancel()">
-          Cancelar
+          Cancel
         </button>
         <button
           mat-button
@@ -91,7 +91,7 @@ export interface NgxMatDatetimePickerContentData<D> {
           class="ngx-mat-datetime-picker-apply-button"
           [color]="data.color"
           (click)="onApply()">
-          Aplicar
+          Apply
         </button>
       </div>
     </div>
